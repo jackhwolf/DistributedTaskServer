@@ -37,7 +37,9 @@ class DistribTaskClient:
             'status': statuses['submitted'],
             'endpoint': endpoint,
             'data': None if not args[0] else args[0],
-            'response': None
+            'response': None,
+            'submit_time': int(time.time() * 1000),
+            'collect_time': -1
         }
         return 1
 
@@ -54,6 +56,7 @@ class DistribTaskClient:
                         self.counts['collected'] += 1
                         self.tasks[taskid]['status'] = statuses['collected']
                         self.tasks[taskid]['response'] = req
+                        self.tasks[taskid]['collect_time'] = int(time.time() * 1000)
                     time.sleep(0.5)
 
 
