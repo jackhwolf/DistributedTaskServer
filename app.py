@@ -5,7 +5,7 @@ from uuid import uuid4
 from TaskMngr import TaskMngr
 from distributed import Client
 
-if __name__ == '__main__':  # this is nec. to use the Client like we do
+if __name__ == '__main__':  # this is nec. to use the Client for some reason
     tm  = TaskMngr()
     app = Flask(__name__)
     api = Api(app, title='DistributedTasks API', prefix='/v1')
@@ -29,7 +29,7 @@ if __name__ == '__main__':  # this is nec. to use the Client like we do
             parser.add_argument('task', required=1, help='Name of task function to submit.')
             args = parser.parse_args()
             tid, msg = tm.submitTask(cli, args.task)
-            return {'tid': tid, 'message': msg}
+            return {'taskid': tid, 'message': msg}
         
         def get(self, tid):
             ''' get result of task if finished, or the task status '''            
@@ -38,6 +38,7 @@ if __name__ == '__main__':  # this is nec. to use the Client like we do
             if resp['status'] == 'finished':
                 resp['result'] = tm.getTaskResult(cli, tid)
             return resp
+
 
     app.run(debug=True)
         

@@ -2,7 +2,6 @@ from uuid import uuid4
 import time
 import numpy as np 
 
-
 class Tasks:
     ''' class to define all the tasks that users can submit '''
 
