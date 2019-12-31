@@ -41,7 +41,7 @@ class TaskMngr:
         '''
         # make sure our task is defined
         if not hasattr(self.defined_tasks, taskfunc_key):
-            return 0, "taskfunc must be defined in Tasks"
+            return 0, "task must be defined in Tasks"
         # generate a new task id and make sure it is valid
         taskid = self._newtid()
         if taskid in self.tasks:
