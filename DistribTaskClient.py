@@ -58,12 +58,20 @@ class DistribTaskClient:
                         self.tasks[taskid]['response'] = req
                         self.tasks[taskid]['collect_time'] = int(time.time() * 1000)
                     time.sleep(0.5)
+        return 1
 
 
 if __name__ == "__main__":
     dtcli = DistribTaskClient()
     dtcli.submit('/task', {'task': 'some_long_task'})
     dtcli.submit('/task', {'task': 'another_long_task'})
+
+    print("\nDo some other work while the jobs run...")
+    for i in range(3):
+        print("\tdoing work...")
+        time.sleep(1)
+    print("done doing other work, lets check the tasks\n")
+
     dtcli.poll_collect()
     dtcli.show_tasks()
     
